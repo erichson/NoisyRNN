@@ -1,0 +1,47 @@
+
+export CUDA_VISIBLE_DEVICES=5; python3 driver.py
+
+
+
+#--------------------------------------------------------------
+Pixel-by-pixel MNIST 784 with unit 128
+#--------------------------------------------------------------
+
+# Reproduce Lipschitz RNN: -- solver base
+export CUDA_VISIBLE_DEVICES=0; python3 driver.py --name mnist --T 784 --n_units 128 --epochs 100 --eps 0.03 --lr 0.003 --lr_decay 0.1 --lr_decay_epoch 90 --beta 0.75 --gamma_A 0.001 --gamma_W 0.001 --add_noise 0.0 --mult_noise 0.0 --optimizer Adam --solver base --seed 1
+
+# Reproduce Anitsymmetric RNN: -- solver base --beta 1 --alpha 0
+export CUDA_VISIBLE_DEVICES=4; python3 driver.py --name mnist --T 784 --n_units 128 --epochs 100 --eps 0.01 --lr 0.002 --lr_decay 0.1 --lr_decay_epoch 90 --beta 1.0 --gamma_A 0.0001 --gamma_W 0.0001 --add_noise 0.0 --mult_noise 0.0 --optimizer Adam --solver base --alpha 0 --seed 1
+
+# Noisy RNN with small noise
+export CUDA_VISIBLE_DEVICES=2; python3 driver.py --name mnist --T 784 --n_units 128 --epochs 100 --eps 0.01 --lr 0.001 --lr_decay 0.1 --lr_decay_epoch 90 --beta 0.75 --gamma_A 0.001 --gamma_W 0.001 --add_noise 0.02 --mult_noise 0.02 --optimizer Adam --solver noisy --seed 1
+
+# Noisy RNN with high noise
+export CUDA_VISIBLE_DEVICES=4; python3 driver.py --name mnist --T 784 --n_units 128 --epochs 100 --eps 0.01 --lr 0.001 --lr_decay 0.1 --lr_decay_epoch 90 --beta 0.75 --gamma_A 0.001 --gamma_W 0.001 --add_noise 0.05 --mult_noise 0.02 --optimizer Adam --solver noisy --seed 1
+
+
+
+
+#--------------------------------------------------------------
+Permuted Pixel-by-pixel MNIST 784 with unit 128
+#--------------------------------------------------------------
+
+# Reproduce Lipschitz RNN: -- solver base
+export CUDA_VISIBLE_DEVICES=0; python3 driver.py --name pmnist --T 784 --n_units 128 --epochs 100 --eps 0.03 --lr 0.0035 --lr_decay 0.1 --lr_decay_epoch 90 --beta 0.75 --gamma_A 0.001 --gamma_W 0.001 --add_noise 0.0 --mult_noise 0.0 --optimizer Adam --solver base --seed 1
+
+# Reproduce Anitsymmetric RNN: -- solver base --beta 1 --alpha 0
+export CUDA_VISIBLE_DEVICES=3; python3 driver.py --name pmnist --T 784 --n_units 128 --epochs 100 --eps 0.01 --lr 0.002 --lr_decay 0.1 --lr_decay_epoch 90 --beta 1.0 --gamma_A 0.0001 --gamma_W 0.0001 --add_noise 0.0 --mult_noise 0.0 --optimizer Adam --solver base --alpha 0 --seed 1
+
+
+# Noisy RNN with small noise
+export CUDA_VISIBLE_DEVICES=1; python3 driver.py --name pmnist --T 784 --n_units 128 --epochs 100 --eps 0.01 --lr 0.001 --lr_decay 0.1 --lr_decay_epoch 90 --beta 0.75 --gamma_A 0.001 --gamma_W 0.001 --add_noise 0.02 --mult_noise 0.02 --optimizer Adam --solver noisy --seed 1
+
+# Noisy RNN with high noise
+export CUDA_VISIBLE_DEVICES=2; python3 driver.py --name pmnist --T 784 --n_units 128 --epochs 100 --eps 0.01 --lr 0.001 --lr_decay 0.1 --lr_decay_epoch 90 --beta 0.75 --gamma_A 0.001 --gamma_W 0.001 --add_noise 0.05 --mult_noise 0.02 --optimizer Adam --solver noisy --seed 1
+
+
+
+
+
+
+
